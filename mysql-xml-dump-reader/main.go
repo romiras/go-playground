@@ -1,8 +1,8 @@
 package main
 
 import (
+	"encoding/csv"
 	"encoding/xml"
-	"fmt"
 	"io"
 	"log"
 	"os"
@@ -29,6 +29,10 @@ func main() {
 	}
 	defer file.Close()
 
+	w := csv.NewWriter(os.Stdout)
+	defer w.Flush()
+	records := make([]string, 0, 4)
+
 	decoder := xml.NewDecoder(file)
 	for {
 		t, err := decoder.Token()      //  wrapper of the File Reader
@@ -38,16 +42,18 @@ func main() {
 		switch se := t.(type) {
 		case xml.StartElement:
 			if se.Name.Local == "field" {
-				var row string
-				err = decoder.DecodeElement(&row, &se)
+				var value string
+				err = decoder.DecodeElement(&value, &se)
 				if err != nil {
 					log.Fatal(err)
 				}
-				fmt.Printf("%v: %+v\n", se.Attr[0].Value, row)
+				records = append(records, value)
 			}
 		case xml.EndElement:
 			if se.Name.Local == "row" {
-				fmt.Println("")
+				w.Write(records)
+				records = records[:0] // reset the slice
+				w.Flush()
 			}
 		default:
 		}
