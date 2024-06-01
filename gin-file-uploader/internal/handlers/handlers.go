@@ -8,21 +8,29 @@ import (
 	"github.com/repo/gin-file-uploader/internal/utils"
 )
 
-func UploadFile(c *gin.Context) {
+func UploadFileHandler(c *gin.Context) {
+	code, err := uploadFile(c)
+	if err != nil {
+		c.JSON(code, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"success": true})
+}
+
+func uploadFile(c *gin.Context) (code int, err error) {
 	file, err := c.FormFile("file")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
+		return http.StatusBadRequest, err
 	}
 
 	dst := utils.GetLocalFilePath(file.Filename)
-	log.Printf("Uploading to %s", dst)
+	log.Printf("Uploading file to %s", dst)
 
 	err = c.SaveUploadedFile(file, dst)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
+		return http.StatusInternalServerError, err
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "File uploaded successfully", "file": dst})
+	return http.StatusOK, nil
 }

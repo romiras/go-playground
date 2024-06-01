@@ -11,7 +11,7 @@ import (
 func setupRouter() *gin.Engine {
 	r := gin.Default()
 
-	r.PUT("/upload", handlers.UploadFile)
+	r.PUT("/upload", handlers.UploadFileHandler)
 
 	return r
 }
