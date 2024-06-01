@@ -1,0 +1,4 @@
+github.com/artyom/guesslanguage v0.0.0-20141224175736-6554ba0928f2 h1:ajsV1xGNM6H86UdptpPj0/mKREe9b+PhyE27RPiClg8=
+github.com/artyom/guesslanguage v0.0.0-20141224175736-6554ba0928f2/go.mod h1:A+ypGNvQmwfzJZ/+7QQXKhN5RiQcUplDqP4OqwQNiAc=
+github.com/endeveit/guesslanguage v0.0.0-20141216121003-b9ec07401dcb h1:z95fAkb3aRK1ufsrcpS4/yiIEtpipJjTgJfivhLU4Gc=
+github.com/endeveit/guesslanguage v0.0.0-20141216121003-b9ec07401dcb/go.mod h1:8f6+5A/hHz2hkYUxivoezHo/OsQbo4argCt878fwLw4=
