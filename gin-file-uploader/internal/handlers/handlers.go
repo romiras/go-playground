@@ -3,9 +3,9 @@ package handlers
 import (
 	"log"
 	"net/http"
-	"path/filepath"
 
 	"github.com/gin-gonic/gin"
+	"github.com/repo/gin-file-uploader/internal/utils"
 )
 
 func UploadFile(c *gin.Context) {
@@ -15,7 +15,7 @@ func UploadFile(c *gin.Context) {
 		return
 	}
 
-	dst := filepath.Join("_uploads", filepath.Base(file.Filename))
+	dst := utils.GetLocalFilePath(file.Filename)
 	log.Printf("Uploading to %s", dst)
 
 	err = c.SaveUploadedFile(file, dst)
