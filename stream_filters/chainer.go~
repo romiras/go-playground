@@ -1,0 +1,96 @@
+package main
+
+import (
+	"io"
+)
+
+type (
+	Chainer struct {
+		// reader io.Reader
+		// w      io.Writer
+		// f func(io.ReadWriter) error
+		// filters []IFilter
+		filter IFilter
+		next   *Chainer
+	}
+
+	IFilter interface {
+		Filter(io.Reader, io.Writer) error
+	}
+
+	SReader struct {
+		reader io.Reader
+		filter IFilter
+	}
+)
+
+func NewSReader(r io.Reader) *SReader {
+	return &SReader{r, func(p []byte) (int, error) { return len(p), nil }}
+}
+
+func (fr *SReader) Filter(filter IFilter) *SReader {
+	return &SReader{fr, filter}
+}
+func (fr *SReader) Read(p []byte) (n int, err error) {
+	n, err = fr.reader.Read(p)
+	if err == nil && fr.filter != nil {
+		n, err = fr.filter(p)
+	}
+	return
+}
+
+func NewChainer( /*r io.Reader*/ filter IFilter) *Chainer {
+	return &Chainer{
+		// reader: r,
+		// filters: make([]IFilter, 0),
+		filter: filter,
+	}
+}
+
+func (c *Chainer) Add(filter IFilter) {
+	if filter != nil {
+		// c.filters = append(c.filters, filter)
+		cnew := &Chainer{filter: filter, next: c}
+		c.next = cnew
+	}
+}
+
+// func (c *Chainer) ApplyFilters() (io.Reader, error) {
+// 	var err error
+// 	for _, f := range c.filters {
+// 		err = f.Filter(r, w)
+// 		if err != nil {
+// 			return nil, err
+// 		}
+// 	}
+// 	return r, nil
+// }
+
+func (c *Chainer) Read(p []byte) (n int, err error) {
+	n, err = c.reader.Read(p)
+	if err == nil && c.filter != nil {
+		n, err = c.filter(p)
+	}
+	return
+}
+
+// r := NewSReader(reader).Filter(output).Filter(capitalize).Filter(output).Filter(spare)
+
+// func (c *Chainer) Read(p []byte) (int, error) {
+// 	return len(p), nil
+// }
+
+// func (c *Chainer) Write(p []byte) (n int, err error) {
+// 	return len(p), nil
+// }
+
+// func (c *Chainer) Filter(io.ReadWriter) error {
+
+// }
+
+/*
+	r1 <- stdout, w1 <- filter(r1)
+	r2 <- w1, w2 <- filter(r2)
+	...
+	R
+*/
