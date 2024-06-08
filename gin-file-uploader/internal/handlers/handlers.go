@@ -5,12 +5,12 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	gin_context "github.com/repo/gin-file-uploader/internal/context"
+	int_context "github.com/repo/gin-file-uploader/internal/context"
 	"github.com/repo/gin-file-uploader/internal/utils"
 )
 
 func UploadFileHandler(c *gin.Context) {
-	code, err := uploadFile(gin_context.NewGinContext(c))
+	code, err := uploadFile(int_context.NewGinContext(c))
 	if err != nil {
 		c.JSON(code, gin.H{"error": err.Error()})
 		return
@@ -19,7 +19,7 @@ func UploadFileHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"success": true})
 }
 
-func uploadFile(ginCtx *gin_context.GinContext) (code int, err error) {
+func uploadFile(ginCtx int_context.UploaderContext) (code int, err error) {
 	file, err := ginCtx.GetFormFile()
 	if err != nil {
 		return http.StatusBadRequest, err

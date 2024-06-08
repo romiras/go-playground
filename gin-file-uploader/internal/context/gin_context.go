@@ -10,7 +10,7 @@ type GinContext struct {
 	ctx *gin.Context
 }
 
-func NewGinContext(ctx *gin.Context) *GinContext {
+func NewGinContext(ctx *gin.Context) UploaderContext {
 	return &GinContext{
 		ctx: ctx,
 	}
