@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 
 	"github.com/tmc/langchaingo/textsplitter"
 )
@@ -15,13 +16,25 @@ const (
 )
 
 func main() {
+	if len(os.Args) < 2 {
+		fmt.Println("Usage: text_chunks <splitter_mode>")
+		fmt.Println("Splitter modes: 0 (RecursiveCharacter), 1 (TokenSplitter), 2 (MarkdownTextSplitter)")
+		return
+	}
+
+	mode, err := strconv.Atoi(os.Args[1])
+	if err != nil || mode < 0 || mode > 2 {
+		fmt.Println("Invalid splitter mode. Please use 0, 1, or 2.")
+		return
+	}
+
 	text, err := readFromStdin()
 	if err != nil {
 		fmt.Printf("Error: %s", err.Error())
 		return
 	}
 
-	splitter := selectSplitter(RecursiveCharacterMode)
+	splitter := selectSplitter(mode)
 
 	if err := printTextChunks(splitter, text); err != nil {
 		fmt.Printf("Error: %s", err.Error())
