@@ -60,7 +60,7 @@ func readFromStdin() (string, error) {
 func selectSplitter(mode int) textsplitter.TextSplitter {
 	switch mode {
 	case RecursiveCharacterMode:
-		return textsplitter.NewRecursiveCharacter()
+		return textsplitter.NewRecursiveCharacter(textsplitter.WithSeparators([]string{"\n\n"}))
 	case TokenSplitterMode:
 		return textsplitter.NewTokenSplitter(textsplitter.WithChunkSize(512), textsplitter.WithChunkOverlap(50))
 	case MarkdownTextSplitterMode:
@@ -80,6 +80,8 @@ func printTextChunks(splitter textsplitter.TextSplitter, text string) error {
 		fmt.Println("---------------")
 		fmt.Println(chunk)
 	}
+
+	fmt.Printf("---------------\nChunks: %d\n", len(chunks))
 
 	return nil
 }
