@@ -36,7 +36,7 @@ func main() {
 
 	splitter := selectSplitter(mode)
 
-	if err := printTextChunks(splitter, text); err != nil {
+	if err := printTextChunks(splitter, text, "---------------"); err != nil {
 		fmt.Printf("Error: %s", err.Error())
 	}
 }
@@ -60,7 +60,8 @@ func readFromStdin() (string, error) {
 func selectSplitter(mode int) textsplitter.TextSplitter {
 	switch mode {
 	case RecursiveCharacterMode:
-		return textsplitter.NewRecursiveCharacter(textsplitter.WithSeparators([]string{"\n\n"}))
+		secondSplitter := textsplitter.NewTokenSplitter(textsplitter.WithChunkSize(512), textsplitter.WithChunkOverlap(50))
+		return textsplitter.NewRecursiveCharacter(textsplitter.WithSeparators([]string{"\n\n"}), textsplitter.WithSecondSplitter(secondSplitter))
 	case TokenSplitterMode:
 		return textsplitter.NewTokenSplitter(textsplitter.WithChunkSize(512), textsplitter.WithChunkOverlap(50))
 	case MarkdownTextSplitterMode:
@@ -70,18 +71,23 @@ func selectSplitter(mode int) textsplitter.TextSplitter {
 	return nil
 }
 
-func printTextChunks(splitter textsplitter.TextSplitter, text string) error {
+func printTextChunks(splitter textsplitter.TextSplitter, text string, newChunkLineSeparator string) error {
 	chunks, err := splitter.SplitText(text)
 	if err != nil {
 		return err
 	}
 
 	for _, chunk := range chunks {
-		fmt.Println("---------------")
+		fmt.Println(newChunkLineSeparator)
 		fmt.Println(chunk)
 	}
 
-	fmt.Printf("---------------\nChunks: %d\n", len(chunks))
+	fmt.Printf(newChunkLineSeparator+"\nChunks: %d\n", len(chunks))
 
 	return nil
 }
+
+// func printAllTextChunks(chunks []string, newChunkLineSeparator string) {
+// }
+
+// splitter := selectSplitter(TokenSplitterMode)
