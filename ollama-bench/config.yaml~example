@@ -1,0 +1,6 @@
+hosts:
+  - http://127.0.0.1:11434
+model: llama3.2:latest
+output: results.json
+timeout_sec: 900
+cleanup: true

@@ -1,5 +1,30 @@
-.vscode
-.idea
+# Go build outputs
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+/bin/
+
+# Coverage and profiling
+coverage.*
+*.prof
+
+# Dependencies
+/vendor/
+
+# Environment and local tooling
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+*~
+*~example
+
+# Project-specific generated files
 /go-app-demo/
 /go-application-example0/
 /_uploads/
