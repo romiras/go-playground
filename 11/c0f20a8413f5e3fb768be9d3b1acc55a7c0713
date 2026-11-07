@@ -1,0 +1,51 @@
+file-watcher/main.go
+  s_8701429fe36cb9::t_76f39b3545fffa 1-40,48-101,118-217
+  s_8701429fe36cb9::t_6530bdc3718645 41-47
+  s_8701429fe36cb9::t_bad67010b50ec4 102-117
+file-watcher/go.mod
+  s_8701429fe36cb9::t_40f770254925b1 7-20
+  s_8701429fe36cb9::t_8ea25da05206db 4-6
+  s_8701429fe36cb9::t_f2d6999475b0f8 1-3
+file-watcher/.gitignore
+  s_8701429fe36cb9::t_80f642542118d7 1-3
+  h_4aea9a9a4a403b 4
+file-watcher/go.sum
+  s_8701429fe36cb9::t_6cb8d57a02fea8 1-66
+file-watcher/main_test.go
+  s_8701429fe36cb9::t_088979609852a4 314-336
+  s_8701429fe36cb9::t_8de6573dc404d8 114
+  s_8701429fe36cb9::t_5b53d5a8e5a094 199-207
+  s_8701429fe36cb9::t_344d005b266a36 232
+  s_8701429fe36cb9::t_d4229c968437fe 1-9,11-99,101-104,111-112,118-156,158,162-166,174-175,194-198,208-231,233-242,244-284,337-369,387-396
+  s_8701429fe36cb9::t_8df7e3cede5d69 10
+  s_8701429fe36cb9::t_0e6ba5977a6a33 176-193
+  s_8701429fe36cb9::t_ab72f9984eb2f0 157,159-161,167-173
+  s_8701429fe36cb9::t_ecb3b332f743eb 113,115-117
+  s_8701429fe36cb9::t_94c5f7c1ce145d 243
+  s_8701429fe36cb9::t_addf776a0a5883 100
+  s_8701429fe36cb9::t_534fc0285ba1ae 285-303,305-313
+  s_8701429fe36cb9::t_9057b2a5db1237 304
+  s_8701429fe36cb9::t_4ff5905436940f 105-110
+  s_8701429fe36cb9::t_6bf986ee25447b 370-386
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "11c0f20a8413f5e3fb768be9d3b1acc55a7c0713",
+  "prompts": {},
+  "humans": {
+    "h_4aea9a9a4a403b": {
+      "author": "Romiras <298544+romiras@users.noreply.github.com>"
+    }
+  },
+  "sessions": {
+    "s_8701429fe36cb9": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "096ae1be-c992-497b-87d7-6966bb404987",
+        "model": "grok-4.7"
+      },
+      "human_author": "Romiras <298544+romiras@users.noreply.github.com>"
+    }
+  }
+}
