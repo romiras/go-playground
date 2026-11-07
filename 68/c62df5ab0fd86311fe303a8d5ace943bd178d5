@@ -1,0 +1,24 @@
+file-watcher/docs/spec.md
+  s_8701429fe36cb9::t_e61e7a7d978832 1-133
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "68c62df5ab0fd86311fe303a8d5ace943bd178d5",
+  "prompts": {},
+  "humans": {
+    "h_4aea9a9a4a403b": {
+      "author": "Romiras <298544+romiras@users.noreply.github.com>"
+    }
+  },
+  "sessions": {
+    "s_8701429fe36cb9": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "096ae1be-c992-497b-87d7-6966bb404987",
+        "model": "unknown"
+      },
+      "human_author": "Romiras <298544+romiras@users.noreply.github.com>"
+    }
+  }
+}
