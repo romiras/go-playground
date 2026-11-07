@@ -1,0 +1,3 @@
+*.log
+.tmp-*
+file-watcher
